@@ -10,9 +10,10 @@
     <div class="bg-[#e7e8e9] mt-2 mx-2 flex items-center rounded-md">
       <Magnifyicon class="text-[#8d9599] mt-2 mx-6" />
       <input
+        @click="showFindFriends = !showFindFriends"
         type="text"
         class="outline-none bg-[#e7e8e9] border-gray-300 w-60 py-2 mt-1"
-        placeholder="Start a new hat "
+        placeholder="Start a new chat "
       />
     </div>
     <div>
@@ -28,6 +29,7 @@ import MessageIcon from 'vue-material-design-icons/Message.vue'
 import ChatDialog from './ChatDialog.vue'
 import { useUserStore } from '@/stores/userstore'
 import { useRouter } from 'vue-router'
+import { storeToRefs } from 'pinia'
 export default {
   name: 'DrawerPage',
   components: {
@@ -39,6 +41,8 @@ export default {
   setup() {
     const userStore = useUserStore()
     const router = useRouter()
+    const { showFindFriends } = storeToRefs(userStore)
+
     const logout = () => {
       let res = confirm('Are you sure you want to logout?')
       if (res) userStore.logout()
